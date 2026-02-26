@@ -17,11 +17,12 @@ export async function POST(req) {
 
     const response = NextResponse.json({ accessToken });
 
+    // set session cookie (no maxAge) so the token is cleared when the browser/tab closes
     response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
       secure: true,
       path: "/",
-      maxAge: 60 * 60 * 24 * 7,
+      // no maxAge or expires -> session cookie
     });
 
     return response;

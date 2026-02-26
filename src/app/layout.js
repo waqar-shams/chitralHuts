@@ -1,6 +1,5 @@
 // /app/layout.js
 import ReactQueryProvider from "../app/hooks/ReactQueryProvider";
-import { AuthProvider } from "../app/context/AuthProvider";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -18,9 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.className}>
       <body className="bg-gray-100">
         <ReactQueryProvider>
-          <AuthProvider>
             {children}
-          </AuthProvider>
         </ReactQueryProvider>
       </body>
     </html>

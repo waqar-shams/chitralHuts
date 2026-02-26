@@ -3,14 +3,18 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   const refreshToken = request.cookies.get("refreshToken");
 
-  const isLoginPage = request.nextUrl.pathname === "/login";
-  const isProtected = request.nextUrl.pathname.startsWith("/dashboard");
+  // normalize paths - login can live under /auth/login
+  const pathname = request.nextUrl.pathname;
+  const isLoginPage = pathname === "/login" || pathname === "/auth/login";
+  const isProtected = pathname.startsWith("/dashboard");
 
   if (!refreshToken && isProtected) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    // no session - force to login
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   if (refreshToken && isLoginPage) {
+    // already authenticated, bounce away from login route
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
@@ -18,5 +22,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login"],
+  matcher: ["/dashboard/:path*", "/auth/login", "/login"],
 };

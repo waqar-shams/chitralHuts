@@ -6,8 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useApi } from "../../hooks/useApi";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../hooks/useAuth"; // use the centralized auth hook
 
 // Validation schema
 const schema = z.object({
@@ -23,7 +22,7 @@ const schema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, token } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   // React Hook Form
@@ -35,35 +34,21 @@ export default function LoginPage() {
     resolver: zodResolver(schema),
   });
 
-  // React Query mutation
-  const loginMutation = useApi({
-    url: "/api/auth/login",
-    method: "POST",
-  });
-
   // Redirect if already logged in
   useEffect(() => {
-    if (token) {
+    if (isAuthenticated) {
       router.replace("/dashboard");
     }
-  }, [token]);
+  }, [isAuthenticated, router]);
 
-  // Form submit handler
+  // Form submit handler simply passes credentials to the hook
   const onSubmit = (values) => {
-    loginMutation.mutate(
-      {
-        email: values.email,
-        password: values.password,
-        remember: values.remember || false,
-      },
-      {
-        onSuccess: (data) => {
-          login(data.accessToken); // store in sessionStorage via AuthProvider
-          router.replace("/dashboard"); // prevent back button
-        },
-        onError: (error) => alert(error.message),
-      }
-    );
+    login({
+      email: values.email,
+      password: values.password,
+      remember: values.remember || false,
+    });
+    // redirect happens automatically via the isAuthenticated effect above
   };
 
   return (

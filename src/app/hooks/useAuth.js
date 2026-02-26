@@ -93,14 +93,9 @@ export function useAuth() {
     return () => clearInterval(interval);
   }, [isAuthenticated]);
 
-  // Logout on browser/tab close
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      logout();
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, []);
+  // NOTE: we no longer log out on `beforeunload` because that triggers on
+  // refresh as well. sessionStorage + a session cookie now guarantee that the
+  // user is cleared when the browser/tab is closed but kept alive on refresh.
 
   return { accessToken, isAuthenticated, isLoading, login, logout };
 }
