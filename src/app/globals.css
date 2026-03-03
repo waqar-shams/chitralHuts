@@ -11,8 +11,13 @@
   --color-primary-light: #34D399;
   --color-primary-dark: #059669;
 
-  --color-muted: #6B7280;
+  --color-gray-100: #6B7280;
+  --color-gray-50: #9CA3AF;
   --color-border: #1F2937;
+  --color-gray: #E5E7EB;
+  --color-dark-gray: #232323;
+ 
+  
 }
 
 @theme inline {

@@ -1,0 +1,248 @@
+"use client";
+
+import { TrendingUp, Download } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+import TransactionCard from "@/app/components/TransactionCard";
+
+export default function TransactionsPage() {
+  const chartData = [
+    { month: "Jan", value: 20000 },
+    { month: "Feb", value: 28000 },
+    { month: "Mar", value: 35000 },
+    { month: "Apr", value: 45000 },
+    { month: "May", value: 55000 },
+    { month: "Jun", value: 80000 },
+    { month: "Jul", value: 95000 },
+    { month: "Aug", value: 105000 },
+    { month: "Sep", value: 130000 },
+    { month: "Oct", value: 165700 },
+  ];
+
+  const transactions = [
+    {
+      id: "TRX-6201",
+      date: "Oct 12, 2025",
+      time: "10:30 AM",
+      description: "Quarterly Dividend Payout",
+      details: "Q3 2025 Distribution",
+      status: "Completed",
+      amount: "+$4,200.00",
+    },
+    {
+      id: "TRX-95432",
+      date: "Sep 15, 2025",
+      time: "2:20 PM",
+      description: "Additional Capital Injection",
+      details: "Phase 3 Expansion Funding",
+      status: "Completed",
+      amount: "+$50,000.00",
+    },
+    {
+      id: "TRX-77210",
+      date: "Jul 01, 2025",
+      time: "9:45 AM",
+      description: "Quarterly Dividend Payout",
+      details: "Q2 2025 Distribution",
+      status: "Completed",
+      amount: "+$3,850.00",
+    },
+    {
+      id: "TRX-65001",
+      date: "Jun 05, 2025",
+      time: "3:15 PM",
+      description: "Phase 1 Funding",
+      details: "Site Excavation & Foundation",
+      status: "Completed",
+      amount: "+$100,000.00",
+    },
+    {
+      id: "TRX-34092",
+      date: "Apr 02, 2025",
+      time: "11:05 AM",
+      description: "Quarterly Dividend Payout",
+      details: "Q1 2025 Distribution",
+      status: "Completed",
+      amount: "+$4,400.00",
+    },
+    {
+      id: "TRX-10001",
+      date: "Jan 15, 2025",
+      time: "9:00 AM",
+      description: "Initial Investment",
+      details: "Project Fund Deposit",
+      status: "Completed",
+      amount: "+$100,000.00",
+    },
+  ];
+
+  return (
+    <main className="min-h-screen bg-[#0B0F14] text-white">
+      <div className="w-full p-6 mx-auto space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold">Transactions History</h1>
+          </div>
+          <button className="flex items-center gap-2 px-4 py-2 bg-[#11161D] hover:bg-[#1A212B] rounded-lg text-sm transition">
+            <Download size={16} />
+            Export CSV
+          </button>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Total Invested */}
+          <TransactionCard
+            icon={<TrendingUp size={20} />}
+            percentage="+24.2%"
+            title="Total Returns Paid"
+            amount="$12.4K"
+            transactions="12 transactions"
+          />
+          {/* Total Returns Paid */}
+         <TransactionCard
+            icon={<TrendingUp size={20} />}
+            percentage="+24.2%"
+            title="Total Returns Paid"
+            amount="$12.4K"
+            transactions="12 transactions"
+          />
+          {/* Pending */}
+         <TransactionCard
+            icon={<TrendingUp size={20} />}
+            percentage="+24.2%"
+            title="Total Returns Paid"
+            amount="$0.00"
+            transactions="0 transactions"
+          />
+        </div>
+
+        {/* Investment Timeline Chart */}
+        <div className="bg-[#11161D] rounded-2xl p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold">Investment Timeline</h2>
+            <span className="text-emerald-400 text-sm">All Time</span>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1A212B" />
+              <XAxis dataKey="month" stroke="#6B7280" />
+              <YAxis stroke="#6B7280" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1A212B",
+                  border: "1px solid #2D3748",
+                  borderRadius: "8px",
+                }}
+                labelStyle={{ color: "#fff" }}
+              />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="#10B981"
+                dot={{ fill: "#10B981", r: 4 }}
+                activeDot={{ r: 6 }}
+                strokeWidth={2}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Transaction Filters and Table */}
+        <div className="bg-[#11161D] rounded-2xl p-6 space-y-6">
+          {/* Tabs/Filters */}
+          <div className="flex justify-between items-center ">
+             <div className="flex gap-6 border border-[#1A212B] rounded-lg px-4 py-2 ">
+            <button className=" text-sm font-medium text-[var(--color-gray-50)]  ">
+              All
+            </button>
+            <button className=" text-sm font-medium text-[var(--color-gray-50)] hover:text-white transition">
+              Deposits
+            </button>
+            <button className=" text-sm font-medium text-[var(--color-gray-50)] hover:text-white transition">
+              Withdrawals
+            </button>
+            <button className=" text-sm font-medium text-[var(--color-gray-50)] hover:text-white transition">
+              Dividends
+            </button>
+          </div>
+           <div>
+            <input
+              type="text"
+              placeholder="Search transactions..."
+              className="w-full px-4 py-2 bg-[#0B0F14] border border-[#1A212B] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400"
+            />
+          </div>
+          </div>
+         
+
+          {/* Search Bar */}
+         
+
+          {/* Transaction Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#1A212B]">
+                  <th className="text-left py-3 px-2  text-sm font-semibold text-[var(--color-gray-100)]">Transaction ID</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-[var(--color-gray-100)]">Date & Time</th>
+                  <th className="text-left py-3 px-2  text-sm font-semibold text-[var(--color-gray-100)]">Description</th>
+                  <th className="text-left py-3 px-2  text-sm font-semibold text-[var(--color-gray-100)]">Status</th>
+                  <th className="text-right py-3 px-2  text-sm font-semibold text-[var(--color-gray-100)]">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((tx, idx) => (
+                  <tr key={idx} className="border-b border-[#1A212B] hover:bg-[#151B23] transition">
+                    <td className="py-4 px-2  text-sm font-normal text-[var(--color-gray-50)] ">{tx.id}</td>
+                    <td className="py-4 px-2 text-sm font-normal text-white">
+                      {tx.date}
+                      <br />
+                      <span className="text-xs font-normal  text-[var(--color-gray-100)]">{tx.time}</span>
+                    </td>
+                    <td className="py-4 px-2">
+                      <div>
+                        <p className="text-sm font-normal text-white">{tx.description}</p>
+                        <p className="text-xs font-normal text-[var(--color-gray-100)]">{tx.details}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 px-2">
+                      <span className="inline-flex items-center px-3 py-2 rounded-md text-xs font-normal bg-emerald-500/20 text-[var(--color-primary)]">
+                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 0C4.65685 0 6 1.34315 6 3C6 4.65685 4.65685 6 3 6C1.34315 6 0 4.65685 0 3C0 1.34315 1.34315 0 3 0Z" fill="#10B981"/>
+<path d="M3 0C4.65685 0 6 1.34315 6 3C6 4.65685 4.65685 6 3 6C1.34315 6 0 4.65685 0 3C0 1.34315 1.34315 0 3 0Z" stroke="#E5E7EB"/>
+</svg>
+
+ <span className="ml-2"> {tx.status} </span>
+                      </span>
+                    </td>
+                    <td className="py-4 px-2 text-right text-sm font-normal text-white">{tx.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex items-center justify-between pt-4 border-t border-[#1A212B]">
+            <p className="text-xs font-normal text-[var(--color-gray-50)]"> Showing <span className="text-xs font-medium text-white"> 1-6 </span> of <span className="text-xs font-medium text-white"> 8 </span> transactions</p>
+            <div className="flex gap-2">
+              <button className="px-3 py-1 text-xs font-normal  text-[var(--color-gray-100)] hover:text-white transition cursor-pointer border border-[#1A212B] rounded-md">Previous</button>
+              <button className="px-3 py-1 text-sm text-white bg-emerald-500/20 rounded">1</button>
+              <button className="px-3 py-1  hover:text-white transition">2</button>
+              <button className="px-3 py-1 text-xs font-normal  text-[var(--color-gray-100)] hover:text-white transition cursor-pointer border border-[#1A212B] rounded-md">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}

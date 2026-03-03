@@ -146,10 +146,10 @@ export default function LoginPage() {
             {/* SUBMIT */}
             <button
               type="submit"
-              disabled={isSubmitting || loginMutation.isPending}
+              disabled={isSubmitting}
               className="w-full py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 transition font-medium disabled:opacity-50"
             >
-              {isSubmitting || loginMutation.isPending ? "Signing in..." : "Sign in"}
+              {isSubmitting ? "Signing in..." : "Sign in"}
             </button>
           </form>
 
