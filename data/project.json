@@ -1,0 +1,340 @@
+{
+  "project": {
+    "id": "CHT-2025-001",
+    "location": "Chitral Valley, KPK",
+    "phase": "Phase 2 Development",
+    "startDate": "Jan 15, 2025",
+    "estimatedCompletion": "Dec 2025"
+  },
+  "stats": {
+    "totalInvested": {
+      "value": 250000,
+      "change": 0.12,
+      "transactions": 3
+    },
+    "availableFunds": {
+      "value": 84300,
+      "remainingPercent": 0.337
+    },
+    "progress": {
+      "percent": 0.45,
+      "status": "On Track",
+      "remainingMonths": 8
+    },
+    "projectedROI": {
+      "percent": 0.28,
+      "change": 0.05
+    }
+  },
+  "chartData": [
+    {
+      "month": "Jan",
+      "value": 20000
+    },
+    {
+      "month": "Feb",
+      "value": 28000
+    },
+    {
+      "month": "Mar",
+      "value": 35000
+    },
+    {
+      "month": "Apr",
+      "value": 45000
+    },
+    {
+      "month": "May",
+      "value": 55000
+    },
+    {
+      "month": "Jun",
+      "value": 80000
+    },
+    {
+      "month": "Jul",
+      "value": 95000
+    },
+    {
+      "month": "Aug",
+      "value": 105000
+    },
+    {
+      "month": "Sep",
+      "value": 130000
+    },
+    {
+      "month": "Oct",
+      "value": 165700
+    }
+  ],
+  "breakdown": [
+    {
+      "name": "Construction",
+      "amount": 98500
+    },
+    {
+      "name": "Materials",
+      "amount": 42700
+    },
+    {
+      "name": "Labor",
+      "amount": 24500
+    }
+  ],
+  "breakdownTotals": {
+    "utilized": 165700,
+    "remaining": 84300
+  },
+  "recentActivity": [],
+  "transactions": [
+    {
+      "id": "TRX-6201",
+      "date": "Oct 12, 2025",
+      "time": "10:30 AM",
+      "description": "Quarterly Dividend Payout",
+      "details": "Q3 2025 Distribution",
+      "status": "Completed",
+      "amount": "+$4,200.00"
+    },
+    {
+      "id": "TRX-95432",
+      "date": "Sep 15, 2025",
+      "time": "2:20 PM",
+      "description": "Additional Capital Injection",
+      "details": "Phase 3 Expansion Funding",
+      "status": "Completed",
+      "amount": "+$50,000.00"
+    },
+    {
+      "id": "TRX-77210",
+      "date": "Jul 01, 2025",
+      "time": "9:45 AM",
+      "description": "Quarterly Dividend Payout",
+      "details": "Q2 2025 Distribution",
+      "status": "Completed",
+      "amount": "+$3,850.00"
+    },
+    {
+      "id": "TRX-65001",
+      "date": "Jun 05, 2025",
+      "time": "3:15 PM",
+      "description": "Phase 1 Funding",
+      "details": "Site Excavation & Foundation",
+      "status": "Completed",
+      "amount": "+$100,000.00"
+    },
+    {
+      "id": "TRX-34092",
+      "date": "Apr 02, 2025",
+      "time": "11:05 AM",
+      "description": "Quarterly Dividend Payout",
+      "details": "Q1 2025 Distribution",
+      "status": "Completed",
+      "amount": "+$4,400.00"
+    },
+    {
+      "id": "TRX-10001",
+      "date": "Jan 15, 2025",
+      "time": "9:00 AM",
+      "description": "Initial Investment",
+      "details": "Project Fund Deposit",
+      "status": "Completed",
+      "amount": "+$100,000.00"
+    }
+  ],
+  "transactionStats": {
+    "totalReturnsPaid": {
+      "icon": "TrendingUp",
+      "percentage": "+24.2%",
+      "title": "Total Returns Paid",
+      "amount": "$12.4K",
+      "transactions": "12 transactions"
+    },
+    "pending": {
+      "icon": "TrendingUp",
+      "percentage": "+0%",
+      "title": "Pending",
+      "amount": "$0.00",
+      "transactions": "0 transactions"
+    }
+  },
+  "progressUpdates": [
+    {
+      "id": 1,
+      "phase": "Phase 2: Structural Development",
+      "title": "Foundation Pouring - Block C",
+      "status": "In Progress",
+      "date": "Started 2 days ago",
+      "description": "Concrete pouring for the main foundation of Block C is currently underway. Weather conditions are favorable.",
+      "images": [
+        "/progress-1.jpg",
+        "/progress-2.jpg",
+        "/progress-2.jpg"
+      ],
+      "progress": 60
+    },
+    {
+      "id": 2,
+      "phase": "Phase 1: Site Preparation",
+      "title": "Excavation Complete",
+      "status": "Completed",
+      "date": "Oct 28, 2025",
+      "description": "Site excavation for all three blocks completed successfully. Soil testing approved.",
+      "progress": 100
+    },
+    {
+      "id": 3,
+      "phase": "Phase 1: Site Preparation",
+      "title": "Site Clearance & Fencing",
+      "status": "Completed",
+      "date": "Oct 15, 2025",
+      "description": "Initial site preparation, debris removal, and security fencing installation.",
+      "progress": 100
+    }
+  ],
+  "milestones": [
+    {
+      "month": "Jan",
+      "label": "Project Kickoff",
+      "completed": true
+    },
+    {
+      "month": "Feb",
+      "label": "Site Prep",
+      "completed": true
+    },
+    {
+      "month": "Mar",
+      "label": "Foundation",
+      "completed": true
+    },
+    {
+      "month": "Apr",
+      "label": "Structural",
+      "completed": false
+    },
+    {
+      "month": "Jun",
+      "label": "Finishing",
+      "completed": false
+    },
+    {
+      "month": "Dec",
+      "label": "Completion",
+      "completed": false
+    }
+  ],
+  "documents": {
+    "legal": [
+      {
+        "id": 1,
+        "name": "Initial Investment Agreement",
+        "date": "Signed on Jan 15, 2025",
+        "type": "PDF",
+        "size": "2.4 MB",
+        "icon": "FileText"
+      },
+      {
+        "id": 2,
+        "name": "Terms of Service Update v2.1",
+        "date": "Added on Jun 20, 2025",
+        "type": "PDF",
+        "size": "1.1 MB",
+        "icon": "FileText"
+      }
+    ],
+    "progress": [
+      {
+        "id": 3,
+        "name": "October 2023 Construction Update",
+        "date": "Uploaded 2 days ago",
+        "type": "PDF",
+        "size": "4.2 MB",
+        "badge": "New",
+        "icon": "FileText"
+      },
+      {
+        "id": 4,
+        "name": "Q3 2023 Milestone Report",
+        "date": "Sep 30, 2025",
+        "type": "PDF",
+        "size": "3.8 MB",
+        "icon": "FileText"
+      },
+      {
+        "id": 5,
+        "name": "Phase 1 Completion Certificate",
+        "date": "Jun 10, 2025",
+        "type": "PDF",
+        "size": "1.5 MB",
+        "icon": "FileText"
+      }
+    ],
+    "decisions": [
+      {
+        "id": 6,
+        "name": "Approval of Phase 2 Material Expansion",
+        "date": "Oct 15, 2025",
+        "type": "PDF",
+        "size": "890 KB",
+        "badge": "Critical",
+        "icon": "FileText"
+      },
+      {
+        "id": 7,
+        "name": "Board Meeting Minutes - Q3",
+        "date": "Sep 15, 2025",
+        "type": "PDF",
+        "size": "1.2 MB",
+        "icon": "FileText"
+      }
+    ]
+  },
+  "withdraw": {
+    "availableBalance": 84320,
+    "lockedAmount": 165680,
+    "recentWithdrawals": [
+      {
+        "date": "Oct 12, 2025",
+        "status": "Completed",
+        "amount": "$2,500.00"
+      },
+      {
+        "date": "Sep 28, 2025",
+        "status": "Completed",
+        "amount": "$1,200.00"
+      },
+      {
+        "date": "Sep 15, 2025",
+        "status": "Completed",
+        "amount": "$3,750.00"
+      },
+      {
+        "date": "Aug 30, 2025",
+        "status": "Completed",
+        "amount": "$1,850.00"
+      },
+      {
+        "date": "Aug 15, 2025",
+        "status": "Completed",
+        "amount": "$5,000.00"
+      },
+      {
+        "date": "Jul 22, 2025",
+        "status": "Completed",
+        "amount": "$2,100.00"
+      },
+      {
+        "date": "Jul 8, 2025",
+        "status": "Completed",
+        "amount": "$4,200.00"
+      },
+      {
+        "date": "Jun 18, 2025",
+        "status": "Completed",
+        "amount": "$1,500.00"
+      }
+    ]
+  }
+}

@@ -3,9 +3,15 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const fetcher = async ({ url, method = "GET", data }) => {
+  const headers = { "Content-Type": "application/json" };
+  const token = sessionStorage.getItem("accessToken");
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(url, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: data ? JSON.stringify(data) : undefined,
   });
   if (!res.ok) throw new Error(await res.text());

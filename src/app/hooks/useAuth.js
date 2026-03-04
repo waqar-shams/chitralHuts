@@ -5,6 +5,7 @@ import { useApi } from "./useApi";
 
 export function useAuth() {
   const [accessToken, setAccessToken] = useState(null);
+  const [user, setUser] = useState(null); // decoded token payload
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Auth check in progress
 
@@ -13,6 +14,17 @@ export function useAuth() {
   const logoutMutation = useApi({ url: "/api/auth/logout", method: "POST" });
   const refreshQuery = useApi({ method: "GET", url: "/api/auth/refresh", enabled: false });
 
+  // helper to decode jwt payload, avoiding extra dependency
+  const decodeToken = (token) => {
+    try {
+      const payload = token.split(".")[1];
+      const decoded = atob(payload.replace(/-/g, "+").replace(/_/g, "/"));
+      return JSON.parse(decoded);
+    } catch {
+      return null;
+    }
+  };
+
   // Login function
   const login = (credentials) => {
     loginMutation.mutate(credentials, {
@@ -20,6 +32,8 @@ export function useAuth() {
         setAccessToken(data.accessToken);
         sessionStorage.setItem("accessToken", data.accessToken); // persist for this session
         setIsAuthenticated(true);
+        const info = decodeToken(data.accessToken);
+        setUser(info);
       },
       onError: (error) => {
         console.error("Login failed:", error);
@@ -53,6 +67,7 @@ export function useAuth() {
     if (token) {
       // Use sessionStorage token if available
       setAccessToken(token);
+      setUser(decodeToken(token));
       setIsAuthenticated(true);
       setIsLoading(false);
     } else {
@@ -62,10 +77,12 @@ export function useAuth() {
         .then(({ data }) => {
           setAccessToken(data.accessToken);
           sessionStorage.setItem("accessToken", data.accessToken);
+          setUser(decodeToken(data.accessToken));
           setIsAuthenticated(true);
         })
         .catch(() => {
           setAccessToken(null);
+          setUser(null);
           setIsAuthenticated(false);
         })
         .finally(() => {
@@ -84,6 +101,7 @@ export function useAuth() {
         .then(({ data }) => {
           setAccessToken(data.accessToken);
           sessionStorage.setItem("accessToken", data.accessToken);
+          setUser(decodeToken(data.accessToken));
         })
         .catch(() => {
           logout();
@@ -97,5 +115,5 @@ export function useAuth() {
   // refresh as well. sessionStorage + a session cookie now guarantee that the
   // user is cleared when the browser/tab is closed but kept alive on refresh.
 
-  return { accessToken, isAuthenticated, isLoading, login, logout };
+  return { accessToken, user, isAuthenticated, isLoading, login, logout };
 }

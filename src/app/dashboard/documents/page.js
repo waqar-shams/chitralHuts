@@ -2,76 +2,14 @@
 
 import { Search, Download, FileText, Badge } from "lucide-react";
 import { useState } from "react";
+import { useApi } from "@/app/hooks/useApi";
 
 export default function DocumentsPage() {
   const [activeTab, setActiveTab] = useState("all");
+  const { data: projectData } = useApi({ url: "/api/project" });
 
-  const documents = {
-    legal: [
-      {
-        id: 1,
-        name: "Initial Investment Agreement",
-        date: "Signed on Jan 15, 2025",
-        type: "PDF",
-        size: "2.4 MB",
-        icon: FileText,
-      },
-      {
-        id: 2,
-        name: "Terms of Service Update v2.1",
-        date: "Added on Jun 20, 2025",
-        type: "PDF",
-        size: "1.1 MB",
-        icon: FileText,
-      },
-    ],
-    progress: [
-      {
-        id: 3,
-        name: "October 2023 Construction Update",
-        date: "Uploaded 2 days ago",
-        type: "PDF",
-        size: "4.2 MB",
-        badge: "New",
-        icon: FileText,
-      },
-      {
-        id: 4,
-        name: "Q3 2023 Milestone Report",
-        date: "Sep 30, 2025",
-        type: "PDF",
-        size: "3.8 MB",
-        icon: FileText,
-      },
-      {
-        id: 5,
-        name: "Phase 1 Completion Certificate",
-        date: "Jun 10, 2025",
-        type: "PDF",
-        size: "1.5 MB",
-        icon: FileText,
-      },
-    ],
-    decisions: [
-      {
-        id: 6,
-        name: "Approval of Phase 2 Material Expansion",
-        date: "Oct 15, 2025",
-        type: "PDF",
-        size: "890 KB",
-        badge: "Critical",
-        icon: FileText,
-      },
-      {
-        id: 7,
-        name: "Board Meeting Minutes - Q3",
-        date: "Sep 15, 2025",
-        type: "PDF",
-        size: "1.2 MB",
-        icon: FileText,
-      },
-    ],
-  };
+  const documents =
+    projectData?.documents || { legal: [], progress: [], decisions: [] };
 
   const tabs = [
     { id: "all", name: "All Files" },
@@ -142,6 +80,8 @@ export default function DocumentsPage() {
             <div className="border border-[#1A212B] rounded-lg overflow-hidden">
   {documents.legal.map((doc, index) => {
     const isLast = index === documents.legal.length - 1;
+    const iconMap = { FileText };
+    const IconComp = iconMap[doc.icon] || FileText;
 
     return (
       <div
@@ -154,7 +94,7 @@ export default function DocumentsPage() {
       >
         <div className="flex items-center gap-4 flex-1">
           <div className="p-3 bg-[#0B0F14] rounded-lg">
-            <doc.icon className="w-5 h-5 text-emerald-400" />
+            <IconComp className="w-5 h-5 text-emerald-400" />
           </div>
           <div>
             <p className="text-sm font-medium text-white">{doc.name}</p>
@@ -197,6 +137,8 @@ export default function DocumentsPage() {
                <div className="border border-[#1A212B] rounded-lg overflow-hidden">
   {documents.progress.map((doc, index) => {
     const isLast = index === documents.progress.length - 1;
+    const iconMap = { FileText };
+    const IconComp = iconMap[doc.icon] || FileText;
 
     return (
       <div
@@ -209,7 +151,7 @@ export default function DocumentsPage() {
       >
         <div className="flex items-center gap-4 flex-1">
           <div className="p-3 bg-[#0B0F14] rounded-lg">
-            <doc.icon className="w-5 h-5 text-emerald-400" />
+            <IconComp className="w-5 h-5 text-emerald-400" />
           </div>
           <div>
             <p className="text-sm font-medium text-white">{doc.name}</p>
@@ -252,6 +194,8 @@ export default function DocumentsPage() {
               <div className="border border-[#1A212B] rounded-lg overflow-hidden">
   {documents.decisions.map((doc, index) => {
     const isLast = index === documents.decisions.length - 1;
+    const iconMap = { FileText };
+    const IconComp = iconMap[doc.icon] || FileText;
 
     return (
       <div
@@ -264,7 +208,7 @@ export default function DocumentsPage() {
       >
         <div className="flex items-center gap-4 flex-1">
           <div className="p-3 bg-[#0B0F14] rounded-lg">
-            <doc.icon className="w-5 h-5 text-emerald-400" />
+            <IconComp className="w-5 h-5 text-emerald-400" />
           </div>
           <div>
             <p className="text-sm font-medium text-white">{doc.name}</p>

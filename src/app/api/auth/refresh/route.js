@@ -18,6 +18,7 @@ export async function POST(req) {
     const newAccessToken = signAccessToken({
       id: payload.id,
       email: payload.email,
+      role: payload.role,
     });
 
     return NextResponse.json({ accessToken: newAccessToken });

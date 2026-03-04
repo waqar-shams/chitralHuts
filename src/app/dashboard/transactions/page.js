@@ -11,9 +11,12 @@ import {
   CartesianGrid,
 } from "recharts";
 import TransactionCard from "@/app/components/TransactionCard";
+import { useApi } from "@/app/hooks/useApi";
 
 export default function TransactionsPage() {
-  const chartData = [
+  const { data: transactions = [], isLoading: txLoading } = useApi({ url: "/api/transactions" });
+
+  const defaultChartData = [
     { month: "Jan", value: 20000 },
     { month: "Feb", value: 28000 },
     { month: "Mar", value: 35000 },
@@ -26,62 +29,35 @@ export default function TransactionsPage() {
     { month: "Oct", value: 165700 },
   ];
 
-  const transactions = [
-    {
-      id: "TRX-6201",
-      date: "Oct 12, 2025",
-      time: "10:30 AM",
-      description: "Quarterly Dividend Payout",
-      details: "Q3 2025 Distribution",
-      status: "Completed",
-      amount: "+$4,200.00",
+  const chartData = defaultChartData;
+
+  // compute basic stats from transactions
+  if (txLoading) {
+    return (
+      <main className="min-h-screen bg-[#0B0F14] text-white flex items-center justify-center">
+        <p>Loading transactions...</p>
+      </main>
+    );
+  }
+
+  const totalAmount = transactions.reduce((sum, tx) => {
+    const num = parseFloat(tx.amount.replace(/[^0-9.-]/g, ""));
+    return sum + (isNaN(num) ? 0 : num);
+  }, 0);
+  const stats = {
+    totalReturnsPaid: {
+      percentage: "",
+      title: "Total Returns Paid",
+      amount: `$${(totalAmount / 1000).toFixed(1)}K`,
+      transactions: `${transactions.length} transactions`,
     },
-    {
-      id: "TRX-95432",
-      date: "Sep 15, 2025",
-      time: "2:20 PM",
-      description: "Additional Capital Injection",
-      details: "Phase 3 Expansion Funding",
-      status: "Completed",
-      amount: "+$50,000.00",
+    pending: {
+      percentage: "",
+      title: "Pending",
+      amount: "$0.00",
+      transactions: "0 transactions",
     },
-    {
-      id: "TRX-77210",
-      date: "Jul 01, 2025",
-      time: "9:45 AM",
-      description: "Quarterly Dividend Payout",
-      details: "Q2 2025 Distribution",
-      status: "Completed",
-      amount: "+$3,850.00",
-    },
-    {
-      id: "TRX-65001",
-      date: "Jun 05, 2025",
-      time: "3:15 PM",
-      description: "Phase 1 Funding",
-      details: "Site Excavation & Foundation",
-      status: "Completed",
-      amount: "+$100,000.00",
-    },
-    {
-      id: "TRX-34092",
-      date: "Apr 02, 2025",
-      time: "11:05 AM",
-      description: "Quarterly Dividend Payout",
-      details: "Q1 2025 Distribution",
-      status: "Completed",
-      amount: "+$4,400.00",
-    },
-    {
-      id: "TRX-10001",
-      date: "Jan 15, 2025",
-      time: "9:00 AM",
-      description: "Initial Investment",
-      details: "Project Fund Deposit",
-      status: "Completed",
-      amount: "+$100,000.00",
-    },
-  ];
+  };
 
   return (
     <main className="min-h-screen bg-[#0B0F14] text-white">
@@ -102,27 +78,19 @@ export default function TransactionsPage() {
           {/* Total Invested */}
           <TransactionCard
             icon={<TrendingUp size={20} />}
-            percentage="+24.2%"
-            title="Total Returns Paid"
-            amount="$12.4K"
-            transactions="12 transactions"
+            percentage={stats.totalReturnsPaid?.percentage}
+            title={stats.totalReturnsPaid?.title}
+            amount={stats.totalReturnsPaid?.amount}
+            transactions={stats.totalReturnsPaid?.transactions}
           />
-          {/* Total Returns Paid */}
-         <TransactionCard
+          <TransactionCard
             icon={<TrendingUp size={20} />}
-            percentage="+24.2%"
-            title="Total Returns Paid"
-            amount="$12.4K"
-            transactions="12 transactions"
+            percentage={stats.pending?.percentage}
+            title={stats.pending?.title}
+            amount={stats.pending?.amount}
+            transactions={stats.pending?.transactions}
           />
-          {/* Pending */}
-         <TransactionCard
-            icon={<TrendingUp size={20} />}
-            percentage="+24.2%"
-            title="Total Returns Paid"
-            amount="$0.00"
-            transactions="0 transactions"
-          />
+          {/* add more cards if data exists */}
         </div>
 
         {/* Investment Timeline Chart */}

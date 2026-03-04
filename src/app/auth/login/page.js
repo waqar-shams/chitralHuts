@@ -22,7 +22,7 @@ const schema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   // React Hook Form
@@ -37,9 +37,13 @@ export default function LoginPage() {
   // Redirect if already logged in
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/dashboard");
+      if (user?.role === "admin") {
+        router.replace("/admin");
+      } else {
+        router.replace("/dashboard");
+      }
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
   // Form submit handler simply passes credentials to the hook
   const onSubmit = (values) => {

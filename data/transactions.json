@@ -1,0 +1,23 @@
+{
+  "1": [],
+  "2": [
+    {
+      "id": "TRX-6201",
+      "date": "Oct 12, 2025",
+      "time": "10:30 AM",
+      "description": "Quarterly Dividend Payout",
+      "details": "Q3 2025 Distribution",
+      "status": "Completed",
+      "amount": "+$4,200.00"
+    },
+    {
+      "id": "TRX-95432",
+      "date": "Sep 15, 2025",
+      "time": "2:20 PM",
+      "description": "Additional Capital Injection",
+      "details": "Phase 3 Expansion Funding",
+      "status": "Completed",
+      "amount": "+$50,000.00"
+    }
+  ]
+}

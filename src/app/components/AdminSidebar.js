@@ -14,11 +14,11 @@ import {
 } from "lucide-react";
 
 const baseItems = [
-  { name: "Overview", href: "/dashboard/overview", icon: LayoutDashboard },
-  { name: "Transactions", href: "/dashboard/transactions", icon: ArrowLeftRight },
-  { name: "Project Progress", href: "/dashboard/progress", icon: ListChecks },
-  { name: "Documents", href: "/dashboard/documents", icon: FileText },
-  { name: "Withdraw", href: "/dashboard/withdraw", icon: LogOut },
+  { name: "Overview", href: "/admin/overview", icon: LayoutDashboard },
+  { name: "Transactions", href: "/admin/transactions", icon: ArrowLeftRight },
+  { name: "Project", href: "/admin/project", icon: ListChecks },
+  { name: "Documents", href: "/admin/documents", icon: FileText },
+  { name: "Withdraw", href: "/admin/withdraw", icon: LogOut },
 ];
 
 const adminItem = { name: "Admin", href: "/admin", icon: ChevronDown };

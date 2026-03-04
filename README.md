@@ -29,6 +29,32 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Admin Panel
+
+This application includes a built‑in administration interface for managing the project data and user accounts. Only authenticated users with the **admin** role can access it.
+
+### Default credentials
+
+- **Admin user:** `admin@example.com` / `Admin123!`
+- **Regular user:** `user@example.com` / `Passw0rd!`
+
+### Accessing the admin area
+
+1. Sign in at `/auth/login` with an admin account.
+2. Visit `/admin` – the layout provides links to:
+   - **Project Data:** edit the JSON used by the dashboard.
+   - **Users:** add/remove users and assign roles.
+   - **Transactions:** manage per-user transaction histories.
+
+Admins can also hit the REST endpoint directly:
+
+- `GET /api/transactions?userId={id}` returns the array for the specified user.
+- `POST /api/transactions` with JSON `{ userId, transactions }` overwrites that user's data.
+
+Regular users simply call `GET /api/transactions` to retrieve their own records. The dashboard page (`/dashboard/transactions`) now uses this API instead of static JSON.
+
+Every API under `/api` now requires a valid JWT; mutations are restricted to admins via role‑based checks.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

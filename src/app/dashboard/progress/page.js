@@ -4,8 +4,12 @@ import { CheckCircle, Clock, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import ProgressCard from "@/app/components/ProgressCard";
 import { TrendingUp, Download } from "lucide-react";
+import { useApi } from "@/app/hooks/useApi";
+
 export default function ProgressPage() {
-  const progressUpdates = [
+  const { data: projectData } = useApi({ url: "/api/project" });
+
+  const defaultProgressUpdates = [
     {
       id: 1,
       phase: "Phase 2: Structural Development",
@@ -16,7 +20,7 @@ export default function ProgressPage() {
       images: [
         "/progress-1.jpg",
         "/progress-2.jpg",
-         "/progress-2.jpg",
+        "/progress-2.jpg",
       ],
       progress: 60,
     },
@@ -40,7 +44,7 @@ export default function ProgressPage() {
     },
   ];
 
-  const milestones = [
+  const defaultMilestones = [
     { month: "Jan", label: "Project Kickoff", completed: true },
     { month: "Feb", label: "Site Prep", completed: true },
     { month: "Mar", label: "Foundation", completed: true },
@@ -48,6 +52,9 @@ export default function ProgressPage() {
     { month: "Jun", label: "Finishing", completed: false },
     { month: "Dec", label: "Completion", completed: false },
   ];
+
+  const progressUpdates = projectData?.progressUpdates || defaultProgressUpdates;
+  const milestones = projectData?.milestones || defaultMilestones;
 
   const getStatusIcon = (status) => {
     if (status === "Completed") return <CheckCircle className="w-5 h-5 text-emerald-400" />;

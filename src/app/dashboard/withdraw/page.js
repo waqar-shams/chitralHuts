@@ -2,22 +2,15 @@
 
 import { ArrowDown, AlertCircle, DollarSign, Clock } from "lucide-react";
 import { useState } from "react";
+import { useApi } from "@/app/hooks/useApi";
 
 export default function WithdrawPage() {
+  const { data: projectData } = useApi({ url: "/api/project" });
   const [withdrawAmount, setWithdrawAmount] = useState(0);
-  const availableBalance = 84320;
-  const lockedAmount = 165680;
+  const availableBalance = projectData?.withdraw?.availableBalance || 0;
+  const lockedAmount = projectData?.withdraw?.lockedAmount || 0;
 
-  const recentWithdrawals = [
-    { date: "Oct 12, 2025", status: "Completed", amount: "$2,500.00" },
-    { date: "Sep 28, 2025", status: "Completed", amount: "$1,200.00" },
-    { date: "Sep 15, 2025", status: "Completed", amount: "$3,750.00" },
-    { date: "Aug 30, 2025", status: "Completed", amount: "$1,850.00" },
-    { date: "Aug 15, 2025", status: "Completed", amount: "$5,000.00" },
-    { date: "Jul 22, 2025", status: "Completed", amount: "$2,100.00" },
-    { date: "Jul 8, 2025", status: "Completed", amount: "$4,200.00" },
-    { date: "Jun 18, 2025", status: "Completed", amount: "$1,500.00" },
-  ];
+  const recentWithdrawals = projectData?.withdraw?.recentWithdrawals || [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
