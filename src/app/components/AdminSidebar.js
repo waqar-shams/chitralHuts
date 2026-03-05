@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/app/hooks/useAuth";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   ArrowLeftRight,
@@ -12,7 +12,7 @@ import {
   LogOut,
   ChevronDown,
 } from "lucide-react";
-
+import Image from "next/image";
 const baseItems = [
   { name: "Overview", href: "/admin/overview", icon: LayoutDashboard },
   { name: "Transactions", href: "/admin/transactions", icon: ArrowLeftRight },
@@ -26,13 +26,28 @@ const adminItem = { name: "Admin", href: "/admin", icon: ChevronDown };
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { user } = useAuth();
+  const router = useRouter();
+  const { user, logout } = useAuth();
 
   const menuItems = [...baseItems];
   if (user?.role === "admin") {
     menuItems.push(adminItem);
   }
+const menuRef = useRef(null);
 
+  const toggleMenu = () => setOpen(!open);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
      <aside className="w-64 min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
@@ -87,6 +102,62 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Logout */}
+      {/* <div className="px-4 py-6 border-t border-gray-800">
+        <button
+          onClick={() => {
+            logout();
+            router.push('/auth/login');
+          }}
+          className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-[#9CA3AF] hover:bg-zinc-900 hover:text-white transition-all w-full"
+        >
+          <LogOut size={18} />
+          Logout
+        </button>
+      </div> */}
+
+
+
+
+
+       <div className="relative w-fit" ref={menuRef}>
+      {/* Profile */}
+      <div
+        onClick={toggleMenu}
+        className="flex items-center gap-4 cursor-pointer"
+      >
+        <Image
+          src="/img.svg"
+          alt="profile"
+          width={50}
+          height={50}
+          className="rounded-full"
+        />
+
+        <span className="text-white text-xl font-medium">
+          Alexander Hunt
+        </span>
+      </div>
+
+      {/* Menu */}
+      <div
+        className={`
+        absolute bottom-full left-0 mb-3 w-48 bg-zinc-900 rounded-lg shadow-lg overflow-hidden
+        transform transition-all duration-300 origin-bottom
+        ${open ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"}
+      `}
+      >
+        <ul className="flex flex-col text-white">
+          <li className="px-4 py-3 hover:bg-zinc-800 cursor-pointer">Profile</li>
+          <li className="px-4 py-3 hover:bg-zinc-800 cursor-pointer">Settings</li>
+          <li className="px-4 py-3 hover:bg-zinc-800 cursor-pointer" onClick={() => {
+            logout();
+            router.push('/auth/login');
+          }}>Logout</li>
+        </ul>
+      </div>
+    </div>
     </aside>
   );
 }

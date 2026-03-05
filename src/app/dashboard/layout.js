@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }) {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-[#0A0A0A]">
       {/* Sidebar component */}
       <Sidebar />
 

@@ -12,6 +12,7 @@ export default function TransactionForm({ userId, onSuccess, editingTransaction 
       details: "",
       status: "Pending",
       amount: "",
+      type: "dividend",
     }
   );
   const [loading, setLoading] = useState(false);
@@ -64,6 +65,7 @@ export default function TransactionForm({ userId, onSuccess, editingTransaction 
           details: "",
           status: "Pending",
           amount: "",
+          type: "dividend",
         });
       }
 
@@ -135,6 +137,21 @@ export default function TransactionForm({ userId, onSuccess, editingTransaction 
             <option value="Completed">Completed</option>
             <option value="Failed">Failed</option>
             <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-300 mb-1">Transaction Type *</label>
+          <select
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+            required
+            className="w-full p-2 bg-[#0B0F14] text-white rounded border border-gray-600 focus:border-emerald-500 focus:outline-none"
+          >
+            <option value="dividend">Dividend</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdrawal">Withdrawal</option>
           </select>
         </div>
 

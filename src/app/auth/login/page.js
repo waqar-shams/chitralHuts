@@ -40,7 +40,7 @@ export default function LoginPage() {
       if (user?.role === "admin") {
         router.replace("/admin");
       } else {
-        router.replace("/dashboard");
+        router.replace("/dashboard/overview");
       }
     }
   }, [isAuthenticated, user, router]);
@@ -60,7 +60,7 @@ export default function LoginPage() {
       {/* LEFT SIDE */}
       <div className="hidden md:block w-1/2 h-screen relative">
         <img
-          src="/login-bg.jpg"
+          src="/LoginImage.svg"
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover"
         />

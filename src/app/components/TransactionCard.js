@@ -8,7 +8,7 @@ export default function TransactionCard({
   transactions,
 }) {
   return (
-    <div className="bg-[#11161D] rounded-2xl h-[208px] p-5 space-y-3">
+    <div className="bg-[#121212] rounded-2xl h-[208px] p-5 space-y-3">
       
 <div className="flex justify-between">
 

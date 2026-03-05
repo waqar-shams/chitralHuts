@@ -8,9 +8,9 @@ export default function StatsCard({
   transactions,
 }) {
   return (
-    <div className="bg-[#11161D] rounded-2xl h-[208px] p-5 space-y-3">
+    <div className="bg-[#121212] rounded-2xl h-[208px] p-5 space-y-3">
       <div className="flex justify-between items-center">
-        <div className="p-2 bg-[#1A212B] rounded-lg text-emerald-400">
+        <div className="p-2 bg-[#1E1E1E] rounded-lg ">
           {icon}
         </div>
 
